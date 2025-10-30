@@ -1,0 +1,27 @@
+#include <stdio.h>
+int main() {
+     int qty;
+     float price,tot_amt;
+     char obj_name[50];
+     printf("----------------------------------------\n");
+     printf("   ********** MALL BILL **********\n");
+     printf("----------------------------------------\n");
+     printf("OBJECT          QTY          PRICE\n");
+     printf("________________________________________\n");
+     printf("Waterbottle      2          40.00\n");
+     printf("----------------------------------------\n");
+     printf("Chipspacket      3          30.00\n");
+     printf("----------------------------------------\n");
+     printf("Casualdress      2          2850.00\n");
+     printf("----------------------------------------\n");
+     printf("Crockeryset      1          570.00\n");
+     printf("________________________________________\n");
+     printf("TOTAL AMOUNT                3490.00\n");
+     printf("-----------------------------------------\n");
+     printf("By Discount 10%=           3141.00\n");
+     printf("________________________________________\n");
+     printf("          •••••THANK YOU•••••          \n");
+     printf("_________________________________________\n");
+
+    return 0;
+}

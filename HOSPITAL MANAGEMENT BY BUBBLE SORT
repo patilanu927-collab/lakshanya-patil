@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Doctor {
+    int id;
+    char name[50],specialization[50];
+    float salary;
+};
+
+int main() {
+    int n, i, j;
+    struct Doctor temp;
+    printf("Enter the number of doctors: ");
+    scanf("%d", &n);
+
+    struct Doctor doc[n];
+
+    // Accept doctor details
+    for (i = 0; i < n; i++) {
+        printf("Enter details for doctor %d:", i+1);
+        printf("ID: ");
+        scanf("%d", &doc[i].id);
+        printf("Specialization: ");
+        scanf("%s", doc[i].specialization);
+        printf("Name:  ");
+        scanf("%s", doc[i].name); // Assumes name has no spaces
+        printf("Salary: ");
+        scanf("%f", &doc[i].salary);
+    }
+
+    // Bubble sort by salary (descending order)
+    for (i = 0; i < n-1; i++) {
+        for (j = 0; j < n-i-1; j++) {
+            if (doc[j].salary < doc[j+1].salary) {
+                temp = doc[j];
+                doc[j] = doc[j+1];
+                doc[j+1] = temp;
+            }
+        }
+    }
+
+    // Display sorted doctor information
+    printf("-----------HOSPITAL MANAGEMENT SYSTEM------------\n");
+    printf("Doctor Details Sorted by Salary (Highest to Lowest):\n");
+    printf("ID\tSpecialization\tName\tSalary\n");
+    for (i = 0; i < n; i++) {
+        printf("\n%d\t%s\t%.f", doc[i].id, doc[i].specialization, doc[i].name, doc[i].salary);
+    }
+
+    return 0;
+}

@@ -1,0 +1,84 @@
+#include <stdio.h>
+
+// user defined datatype for string
+typedef struct {
+    char text[50];
+} MyString;
+
+// function to find length of string
+int myLength(MyString s) {
+    int i = 0;
+    while (s.text[i] != '\0') {
+        i++;
+    }
+    return i;
+}
+
+// function to copy one string to another
+void myCopy(MyString *d, MyString s) {
+    int i = 0;
+    while (s.text[i] != '\0') {
+        d->text[i] = s.text[i];
+        i++;
+    }
+    d->text[i] = '\0';
+}
+
+// function to compare two strings
+int myCompare(MyString a, MyString b) {
+    int i = 0;
+    while (a.text[i] != '\0' && b.text[i] != '\0') {
+        if (a.text[i] != b.text[i]) {
+            return a.text[i] - b.text[i];
+        }
+        i++;
+    }
+    return a.text[i] - b.text[i];
+}
+
+// function to join two strings
+void myConcat(MyString *d, MyString s) {
+    int i = myLength(*d);
+    int j = 0;
+
+    while (s.text[j] != '\0') {
+        d->text[i] = s.text[j];
+        i++;
+        j++;
+    }
+    d->text[i] = '\0';
+}
+
+// main program
+int main() {
+
+    MyString entered, stored, copied, welcome;
+
+    // giving values to stored roll and welcome message
+    myCopy(&stored, (MyString){"22CS014"});
+    myCopy(&welcome, (MyString){"Welcome, "});
+
+    printf("Enter your roll number: ");
+    scanf("%49s", entered.text);  // safe input
+
+    // copy operation
+    myCopy(&copied, entered);
+    printf("\nCopied Roll Number: %s\n", copied.text);
+
+    // length operation
+    int len = myLength(entered);
+    printf("Length of entered roll number: %d\n", len);
+
+    // compare operation
+    if (myCompare(entered, stored) == 0) {
+        printf("Login Successful!\n");
+    } else {
+        printf("Login Failed!\n");
+    }
+
+    // concatenation
+    myConcat(&welcome, entered);
+    printf("After Concatenation: %s\n", welcome.text);
+
+    return 0;
+}

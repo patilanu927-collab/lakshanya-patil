@@ -1,0 +1,19 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+
+int main() {
+    int moisture_level;
+
+    printf("Enter soil moisture level (0-10): ");
+    scanf("%d", &moisture_level);
+
+    if (moisture_level < 0 || moisture_level > 10) {
+        printf("Invalid input. Enter a value between 0 and 10.\n");
+    } else if (moisture_level <= 3) {
+        printf("Soil is dry. Water the plants.\n");
+    } else {
+        printf("Soil is moist. No need to water.\n");
+    }
+   return 0;
+}
+

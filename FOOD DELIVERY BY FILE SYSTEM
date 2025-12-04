@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void showMenu();
+void takeOrder();
+void viewOrderHistory();
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n========== FOOD DELIVERY SYSTEM ==========\n");
+        printf("1. Show Menu\n");
+        printf("2. Place Order\n");
+        printf("3. View Order History\n");
+        printf("4. Exit\n");
+        printf("------------------------------------------\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                showMenu();
+                break;
+            case 2:
+                takeOrder();
+                break;
+            case 3:
+                viewOrderHistory();
+                break;
+            case 4:
+                printf("\nThank you for using Food Delivery System!\n");
+                exit(0);
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+    }
+    return 0;
+}
+
+void showMenu() {
+    printf("\n--------------- MENU ----------------\n");
+    printf("1. Pizza        - Rs 250\n");
+    printf("2. Burger       - Rs 120\n");
+    printf("3. Fries        - Rs 80\n");
+    printf("4. Cold Drink   - Rs 40\n");
+    printf("--------------------------------------\n");
+}
+
+void takeOrder() {
+    FILE *fp;
+    fp = fopen("orders.txt", "a");
+
+    if (fp == NULL) {
+        printf("Error opening file! Order not saved.\n");
+        return;
+    }
+
+    int item, qty;
+    int price = 0;
+
+    showMenu();
+    printf("\nEnter item number to order: ");
+    scanf("%d", &item);
+
+    printf("Enter quantity: ");
+    scanf("%d", &qty);
+
+    switch(item) {
+        case 1: price = 250 * qty; break;
+        case 2: price = 120 * qty; break;
+        case 3: price = 80 * qty;  break;
+        case 4: price = 40 * qty;  break;
+        default:
+            printf("Invalid item!\n");
+            fclose(fp);
+            return;
+    }
+
+    printf("\nYour order total: Rs %d\n", price);
+
+    // Write order to file  
+    fprintf(fp, "Item: %d, Quantity: %d, Total: Rs %d\n", item, qty, price);
+    fclose(fp);
+
+    printf("Order saved successfully!\n");
+}
+
+void viewOrderHistory() {
+    FILE *fp;
+    fp = fopen("orders.txt", "r");
+
+    if (fp == NULL) {
+        printf("No order history found.\n");
+        return;
+    }
+
+    char line[200];
+    printf("\n----------- ORDER HISTORY -------------\n");
+
+    while (fgets(line, sizeof(line), fp)) {
+        printf("%s", line);
+    }
+
+    printf("---------------------------------------\n");
+    fclose(fp);
+}
